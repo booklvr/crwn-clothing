@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import FormInput from '../form-input/FormInput'
 import CustomButton from '../custom-button/CustomButton'
 
@@ -13,11 +13,6 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   }
-
-  useEffect(() => {
-    console.log('email', email);
-    console.log('password', password);
-  }, [email, password])
 
   return (
     <div className="sign-in">
