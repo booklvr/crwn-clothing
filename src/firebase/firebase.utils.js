@@ -12,6 +12,12 @@ const config = {
   measurementId: 'G-TV7SKNRFKM',
 }
 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return
+
+  console.log(firestore.doc('users/1238asdf98asfd'))
+}
+
 firebase.initializeApp(config)
 
 export const auth = firebase.auth()

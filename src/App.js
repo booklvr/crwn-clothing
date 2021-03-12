@@ -5,14 +5,15 @@ import HomePage from './pages/homepage/HomePage'
 import ShopPage from './pages/shop/ShopPage'
 import Header from './components/header/Header'
 import SignInSignOut from './pages/sign-in-sign-up/SignInSignUp'
-import { auth } from './firebase/firebase.utils.js'
+import { auth, createUserProfileDocument } from './firebase/firebase.utils.js'
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
-    return auth.onAuthStateChanged((user) => {
-      setCurrentUser(user)
+    return auth.onAuthStateChanged(async (user) => {
+      createUserProfileDocument(user)
+      // setCurrentUser(user)
       console.log(user)
     })
   }, [])
