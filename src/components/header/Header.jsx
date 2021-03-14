@@ -10,7 +10,6 @@ import CartDropdown from '../cart-dropdown/CartDropdown'
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user)
   const { hidden } = useSelector((state) => state.cart)
-  console.log('currentUser', currentUser)
 
   return (
     <div className='header'>

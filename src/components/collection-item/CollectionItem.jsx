@@ -6,7 +6,6 @@ import CustomButton from '../custom-button/CustomButton'
 import './collectionItem.scss'
 
 const CollectionItem = ({ item }) => {
-  console.log(item)
   const { name, price, imageUrl } = item
   const dispatch = useDispatch()
 
