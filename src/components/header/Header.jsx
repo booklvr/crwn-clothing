@@ -2,11 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
+import CartIcon from '../cart-icon/CartIcon'
 import { auth } from '../../firebase/firebase.utils.js'
 import './header.scss'
+import CartDropdown from '../cart-dropdown/CartDropdown'
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user)
+  const { hidden } = useSelector((state) => state.cart)
   console.log('currentUser', currentUser)
 
   return (
@@ -35,7 +38,9 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {!hidden && <CartDropdown />}
     </div>
   )
 }
