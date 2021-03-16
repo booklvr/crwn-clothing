@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { createStructuredSelector} from 'reselect';
 
 // COMPONENTS
 import CartIcon from '../cart-icon/CartIcon'
@@ -10,16 +9,13 @@ import CartDropdown from '../cart-dropdown/CartDropdown'
 // UTILS
 import { auth } from '../../firebase/firebase.utils.js'
 
-
 // SELECTORS
-import {selectCurrentUser } from '../../redux/user/user.selectors'
+import { selectCurrentUser } from '../../redux/user/user.selectors'
 import { selectHidden } from '../../redux/cart/cart.selectors'
 
 // STYLES
 import './header.scss'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
-
-
 
 const Header = () => {
   const currentUser = useSelector(selectCurrentUser)

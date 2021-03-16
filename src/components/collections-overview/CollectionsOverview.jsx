@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux'
 import CollectionPreview from '../collection-preview/CollectionPreview'
 
 // SELECTORS
-import { selectShopCollections } from '../../redux/shop/shop.selectors'
+import { selectCollectionsForPreview } from '../../redux/shop/shop.selectors'
 
 // STYLES
 import './collectionsOverview.scss'
 
 const CollectionsOverview = () => {
-  const collections = useSelector(selectShopCollections)
+  const collections = useSelector(selectCollectionsForPreview)
   return (
     <div className='collections-overview'>
       {collections.map(({ id, ...otherCollectionProps }) => (
