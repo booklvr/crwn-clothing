@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
-import CollectionPreview from '../../components/collection-preview/CollectionPreview'
-import SHOP_DATA from './shop-data'
+import { useSelector } from 'react-redux'
+import { Route } from 'react-router-dom'
 
-const ShopPage = () => {
-  const [collections] = useState(SHOP_DATA)
+// PAGES
+import CollectionPage from '../collectionPage/CollectionPage'
+
+// COMPONENTS
+import CollectionsOverview from '../../components/collections-overview/CollectionsOverview'
+
+
+const ShopPage = ({ match }) => {
+  console.log(match)
   return (
     <div className='shop-page'>
-      {collections.map(({ id, ...otherCollectionProps }) => (
-        <CollectionPreview
-          key={id}
-          {...otherCollectionProps}
-        ></CollectionPreview>
-      ))}
+      <Route path={`${match.path}/overview`} component={CollectionsOverview} />
+      <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
     </div>
   )
 }
