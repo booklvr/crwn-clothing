@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 // Components
 import CheckoutItem from '../../components/checkout-item/CheckoutItem'
+import StripeButton from '../../components/stripe-button/StripeButton'
 
 // SELECTORS
 import {
@@ -43,6 +44,7 @@ const CheckoutPage = () => {
       <div className='total'>
         <span>Total: {total}</span>
       </div>
+      <StripeButton price={total}/>
     </div>
   )
 }
