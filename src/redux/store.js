@@ -6,7 +6,11 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import rootReducer from './root-reducer'
 
-const middleware = [logger, thunk]
+const middleware = [thunk]
+
+if (process.env.NODE_ENV === 'development') {
+  middleware.push(logger)
+}
 
 const composeEnhancers = composeWithDevTools({
   trace: true,
