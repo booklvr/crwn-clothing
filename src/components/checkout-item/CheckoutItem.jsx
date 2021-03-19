@@ -11,34 +11,35 @@ import {
 } from '../../redux/cart/cart.actions'
 
 // STYLES
+import {CheckoutItemContainer, ImageContainer, CustomImage, CheckoutItemData, CheckoutItemDataQuantity, QuantityValue, ArrowButton, RemoveButton} from './checkoutItem.styles'
 import './checkoutItem.scss'
 
 const CheckoutItem = ({ cartItem }) => {
   const { id, imageUrl, name, quantity, price } = cartItem
   const dispatch = useDispatch()
   return (
-    <div className='checkout-item'>
-      <div className='image-container'>
-        <img src={imageUrl} alt='item' />
-      </div>
-      <span className='name'>{name}</span>
-      <span className='quantity'>
-        <div className='arrow' onClick={() => dispatch(removeItem(id))}>
+    <CheckoutItemContainer>
+      <ImageContainer>
+        <CustomImage src={imageUrl} alt='item' />
+      </ImageContainer>
+      <CheckoutItemData>{name}</CheckoutItemData>
+      <CheckoutItemDataQuantity className='quantity'>
+        <ArrowButton className='arrow' onClick={() => dispatch(removeItem(id))}>
           &#10094;
-        </div>
-        <span className='value'>{quantity}</span>
-        <div className='arrow' onClick={() => dispatch(addItem(cartItem))}>
+        </ArrowButton>
+        <QuantityValue className='value'>{quantity}</QuantityValue>
+        <ArrowButton className='arrow' onClick={() => dispatch(addItem(cartItem))}>
           &#10095;
-        </div>
-      </span>
-      <span className='price'>{price}</span>
-      <div
+        </ArrowButton>
+      </CheckoutItemDataQuantity>
+      <CheckoutItemData className='price'>{price}</CheckoutItemData>
+      <RemoveButton
         className='remove-button'
         onClick={() => dispatch(clearItemFromCart(id))}
       >
         &#10005;
-      </div>
-    </div>
+      </RemoveButton>
+    </CheckoutItemContainer>
   )
 }
 
