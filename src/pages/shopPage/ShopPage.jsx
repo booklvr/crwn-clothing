@@ -27,12 +27,20 @@ const ShopPage = ({ match }) => {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     const collectionRef = firestore.collection('collections')
-    const unsubscribeFromSnapshot = collectionRef.onSnapshot(async (snapshot) => {
+
+    collectionRef.get().then((snapshot) => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
       dispatch(updateCollections(collectionsMap))
       setLoading(false)
     })
-    return unsubscribeFromSnapshot
+    // const unsubscribeFromSnapshot = collectionRef.onSnapshot(
+    //   async (snapshot) => {
+    //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
+    //     dispatch(updateCollections(collectionsMap))
+    //     setLoading(false)
+    //   }
+    // )
+    // return unsubscribeFromSnapshot
   }, [dispatch])
 
   return (
