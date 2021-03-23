@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
@@ -10,37 +11,24 @@ import CollectionsOverview from '../../components/collections-overview/Collectio
 import WithSpinner from '../../components/with-spinner/WithSpinner'
 
 // ACTIONS
-import { updateCollections } from '../../redux/shop/shop.actions'
+import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions'
 
-// UTILS
+// SELECTORS
 import {
-  firestore,
-  convertCollectionsSnapshotToMap,
-} from '../../firebase/firebase.utils'
+  selectIsCollectionFetching,
+  selectIsCollectionsLoaded,
+} from '../../redux/shop/shop.selectors'
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 
 const ShopPage = ({ match }) => {
   const dispatch = useDispatch()
+  const isCollectionFetching = useSelector(selectIsCollectionFetching)
+  const isCollectionsLoaded = useSelector(selectIsCollectionsLoaded)
 
-  const [loading, setLoading] = useState(true)
   useEffect(() => {
-    const collectionRef = firestore.collection('collections')
-
-    collectionRef.get().then((snapshot) => {
-      const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
-      dispatch(updateCollections(collectionsMap))
-      setLoading(false)
-    })
-    // const unsubscribeFromSnapshot = collectionRef.onSnapshot(
-    //   async (snapshot) => {
-    //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
-    //     dispatch(updateCollections(collectionsMap))
-    //     setLoading(false)
-    //   }
-    // )
-    // return unsubscribeFromSnapshot
+    dispatch(fetchCollectionsStartAsync())
   }, [dispatch])
 
   return (
@@ -49,13 +37,19 @@ const ShopPage = ({ match }) => {
         exact
         path={`${match.path}`}
         render={(props) => (
-          <CollectionOverviewWithSpinner isLoading={loading} {...props} />
+          <CollectionOverviewWithSpinner
+            isLoading={isCollectionFetching}
+            {...props}
+          />
         )}
       />
       <Route
         path={`${match.path}/:collectionId`}
         render={(props) => (
-          <CollectionPageWithSpinner isLoading={loading} {...props} />
+          <CollectionPageWithSpinner
+            isLoading={!isCollectionsLoaded}
+            {...props}
+          />
         )}
       />
     </div>
