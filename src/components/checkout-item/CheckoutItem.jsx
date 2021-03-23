@@ -1,7 +1,4 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-
-
 
 // ACTIONS
 import {
@@ -11,34 +8,31 @@ import {
 } from '../../redux/cart/cart.actions'
 
 // STYLES
-import {CheckoutItemContainer, ImageContainer, CustomImage, CheckoutItemData, CheckoutItemDataQuantity, QuantityValue, ArrowButton, RemoveButton} from './checkoutItem.styles'
-import './checkoutItem.scss'
+import {
+  CheckoutItemContainer,
+  ImageContainer,
+  TextContainer,
+  QuantityContainer,
+  RemoveButtonContainer,
+} from './checkoutItem.styles'
 
 const CheckoutItem = ({ cartItem }) => {
-  const { id, imageUrl, name, quantity, price } = cartItem
-  const dispatch = useDispatch()
+  const { imageUrl, name, quantity, price } = cartItem
   return (
     <CheckoutItemContainer>
       <ImageContainer>
-        <CustomImage src={imageUrl} alt='item' />
+        <img src={imageUrl} alt='item' />
       </ImageContainer>
-      <CheckoutItemData>{name}</CheckoutItemData>
-      <CheckoutItemDataQuantity className='quantity'>
-        <ArrowButton className='arrow' onClick={() => dispatch(removeItem(id))}>
-          &#10094;
-        </ArrowButton>
-        <QuantityValue className='value'>{quantity}</QuantityValue>
-        <ArrowButton className='arrow' onClick={() => dispatch(addItem(cartItem))}>
-          &#10095;
-        </ArrowButton>
-      </CheckoutItemDataQuantity>
-      <CheckoutItemData className='price'>{price}</CheckoutItemData>
-      <RemoveButton
-        className='remove-button'
-        onClick={() => dispatch(clearItemFromCart(id))}
-      >
+      <TextContainer>{name}</TextContainer>
+      <QuantityContainer>
+        <div onClick={() => removeItem(cartItem)}>&#10094;</div>
+        <span>{quantity}</span>
+        <div onClick={() => addItem(cartItem)}>&#10095;</div>
+      </QuantityContainer>
+      <TextContainer>{price}</TextContainer>
+      <RemoveButtonContainer onClick={() => clearItemFromCart(cartItem)}>
         &#10005;
-      </RemoveButton>
+      </RemoveButtonContainer>
     </CheckoutItemContainer>
   )
 }

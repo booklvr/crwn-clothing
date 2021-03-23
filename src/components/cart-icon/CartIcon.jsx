@@ -1,10 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { toggleCartHidden } from '../../redux/cart/cart.actions'
-import { selectCartItemsCount } from '../../redux/cart/cart.selectors'
-import './cartIcon.scss'
 
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg'
+// ACTIONS
+import { toggleCartHidden } from '../../redux/cart/cart.actions'
+
+// SELECTORS
+import { selectCartItemsCount } from '../../redux/cart/cart.selectors'
+
+
+// STYLES
+import {
+  CartIconContainer,
+  ItemCountContainer,
+  ShoppingIcon,
+} from './cartIcon.styles'
 
 const CartIcon = () => {
   const dispatch = useDispatch()
@@ -18,10 +27,10 @@ const CartIcon = () => {
   //   dispatch(toggleCartHidden())
   // }
   return (
-    <div className='cart-icon' onClick={() => dispatch(toggleCartHidden())}>
-      <ShoppingIcon className='shopping-icon' />
-      <span className='item-count'>{itemCount}</span>
-    </div>
+    <CartIconContainer onClick={() => dispatch(toggleCartHidden())}>
+      <ShoppingIcon />
+      <ItemCountContainer>{itemCount}</ItemCountContainer>
+    </CartIconContainer>
   )
 }
 
