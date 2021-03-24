@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 // ACTIONS
 import {
@@ -17,6 +18,7 @@ import {
 } from './checkoutItem.styles'
 
 const CheckoutItem = ({ cartItem }) => {
+  const dispatch = useDispatch()
   const { imageUrl, name, quantity, price } = cartItem
   return (
     <CheckoutItemContainer>
@@ -25,9 +27,9 @@ const CheckoutItem = ({ cartItem }) => {
       </ImageContainer>
       <TextContainer>{name}</TextContainer>
       <QuantityContainer>
-        <div onClick={() => removeItem(cartItem)}>&#10094;</div>
+        <div onClick={() => dispatch(removeItem(cartItem))}>&#10094;</div>
         <span>{quantity}</span>
-        <div onClick={() => addItem(cartItem)}>&#10095;</div>
+        <div onClick={() => dispatch(addItem(cartItem))}>&#10095;</div>
       </QuantityContainer>
       <TextContainer>{price}</TextContainer>
       <RemoveButtonContainer onClick={() => clearItemFromCart(cartItem)}>

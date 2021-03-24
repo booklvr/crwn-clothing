@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -17,7 +17,7 @@ import {
 } from '../../redux/shop/shop.selectors'
 
 // ACTIONS
-import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions'
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
