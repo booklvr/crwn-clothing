@@ -10,14 +10,14 @@ import CollectionPage from '../collectionPage/CollectionPage'
 import CollectionsOverview from '../../components/collections-overview/CollectionsOverview'
 import WithSpinner from '../../components/with-spinner/WithSpinner'
 
-// ACTIONS
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions'
-
 // SELECTORS
 import {
   selectIsCollectionFetching,
   selectIsCollectionsLoaded,
 } from '../../redux/shop/shop.selectors'
+
+// ACTIONS
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
@@ -28,7 +28,7 @@ const ShopPage = ({ match }) => {
   const isCollectionsLoaded = useSelector(selectIsCollectionsLoaded)
 
   useEffect(() => {
-    dispatch(fetchCollectionsStartAsync())
+    dispatch(fetchCollectionsStart())
   }, [dispatch])
 
   return (
