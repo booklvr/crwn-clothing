@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 // COMPONENTS
 import CartIcon from '../cart-icon/CartIcon'
@@ -20,8 +20,10 @@ import {
   OptionLink,
 } from './header.styles.js'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
+import { signOutStart } from '../../redux/user/user.actions'
 
 const Header = () => {
+  const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
   const hidden = useSelector(selectHidden)
 
@@ -37,7 +39,7 @@ const Header = () => {
           <OptionLink
             as='div'
             onClick={() => {
-              auth.signOut()
+              dispatch(signOutStart())
             }}
           >
             SIGN OUT

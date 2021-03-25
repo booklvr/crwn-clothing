@@ -4,6 +4,10 @@ import {
   SIGN_IN_FAILURE,
   SIGN_IN_SUCCESS,
   SET_CURRENT_USER,
+  CHECK_USER_SESSION,
+  SIGN_OUT_START,
+  SIGN_OUT_SUCCESS,
+  SIGN_OUT_FAILURE,
 } from './user.constants'
 
 export const setCurrentUser = (user) => ({
@@ -27,5 +31,22 @@ export const signInSuccess = (user) => ({
 
 export const signInFailure = (error) => ({
   type: SIGN_IN_FAILURE,
+  payload: error,
+})
+
+export const checkUserSession = () => ({
+  type: CHECK_USER_SESSION,
+})
+
+export const signOutStart = () => ({
+  type: SIGN_OUT_START,
+})
+
+export const signOutSuccess = () => ({
+  type: SIGN_OUT_SUCCESS,
+})
+
+export const signOutFailure = (error) => ({
+  type: SIGN_OUT_FAILURE,
   payload: error,
 })
