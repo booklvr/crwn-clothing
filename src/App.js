@@ -22,7 +22,6 @@ import { selectCurrentUser } from './redux/user/user.selectors'
 const App = () => {
   const dispatch = useDispatch()
   const currentUser = useSelector(selectCurrentUser)
-  console.log('CURRENT_USER', currentUser)
 
   useEffect(() => {
     dispatch(checkUserSession())
