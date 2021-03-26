@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, all } from 'redux-saga/effects'
 
 // CONSTANTS
 import { FETCH_COLLECTIONS_START } from './shop.constants'
@@ -28,4 +28,8 @@ export function* fetchCollectionsAsync() {
 
 export function* fetchCollectionsStart() {
   yield takeLatest(FETCH_COLLECTIONS_START, fetchCollectionsAsync)
+}
+
+export function* shopSagas() {
+  yield all([call(fetchCollectionsStart)])
 }
